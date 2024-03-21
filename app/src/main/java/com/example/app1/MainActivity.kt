@@ -1,5 +1,6 @@
 package com.example.app1
 
+import android.content.Intent
 import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,6 +14,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -23,7 +27,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -47,6 +54,10 @@ class MainActivity : ComponentActivity() {
 fun Demo(){
 
     Column(Modifier.fillMaxSize()){
+
+
+        val mContext = LocalContext.current
+
         Text(text = "Welcome to Android",
             color = Color.Cyan ,
             fontSize = 30.sp ,
@@ -110,9 +121,20 @@ fun Demo(){
         Spacer(modifier = Modifier.height(20.dp))
 
 
-        Image(painter = painterResource(id = R.drawable.ic_launcher_foreground),
-            contentDescription = "Image" ,
-            modifier = Modifier.align(Alignment.CenterHorizontally))
+        Image(
+            painter = painterResource(id = R.drawable.labrador),
+            contentDescription = "Labrador",
+            alignment = Alignment.Center,
+            modifier = Modifier
+                .size(200.dp)
+                .clip(shape = CircleShape ),
+                contentScale = ContentScale.Crop
+
+
+        )
+
+
+        Spacer(modifier = Modifier.width(20.dp))
 
         Text(
             text = "eMobilis Mobile Training Institute" ,
@@ -123,7 +145,9 @@ fun Demo(){
         Spacer(modifier = Modifier.height(20.dp))
 
 
-        Button(onClick = { /*TODO*/ },
+        Button(onClick = {
+                         mContext.startActivity(Intent(mContext,LayoutActivity::class.java))
+        },
             shape = RoundedCornerShape(5.dp) ,
             colors = ButtonDefaults.buttonColors(Color.Cyan) ,
             modifier = Modifier

@@ -1,5 +1,6 @@
 package com.example.app1
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Share
@@ -31,6 +33,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -54,15 +57,19 @@ class LayoutActivity : ComponentActivity() {
 fun Layout(){
 
     Column (modifier = Modifier.fillMaxSize()){
+        
+        val mContext = LocalContext.current
 
         //TopAppBar
         TopAppBar(
             title = { Text(text = "Home", color = Color.White)} ,
             colors = TopAppBarDefaults.mediumTopAppBarColors(Color.Gray) ,
             navigationIcon = {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(imageVector =Icons.Default.Menu ,
-                        contentDescription ="menu" ,
+                IconButton(onClick = {
+                    mContext.startActivity(Intent(mContext,MainActivity::class.java))
+                }) {
+                    Icon(imageVector =Icons.Default.ArrowBack ,
+                        contentDescription ="arrowback" ,
                         tint = Color.White)
                     
                 }
@@ -158,7 +165,9 @@ fun Layout(){
 
         Row {
 
-            Button(onClick = { /*TODO*/ },
+            Button(onClick = {
+                mContext.startActivity(Intent(mContext,IntentActivity::class.java))
+            },
                 shape = RoundedCornerShape(5.dp) ,
                 colors = ButtonDefaults.buttonColors(Color.Gray) ,
                 modifier = Modifier
